@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-graph',
@@ -7,21 +7,7 @@ import { Component, OnDestroy } from '@angular/core';
 })
 export class GraphComponent implements OnDestroy {
 
-  results: any[] = [
-    {
-      "name": "Germany",
-      "value": 24
-    },
-    {
-      "name": "USA",
-      "value": 40
-    },
-    {
-      "name": "France",
-      "value": 30
-    }
-  ];
-
+  @Input() results: any[] = [];
   // options
   showXAxis = true;
   showYAxis = true;
@@ -33,18 +19,20 @@ export class GraphComponent implements OnDestroy {
   yAxisLabel = 'Votes';
 
   colorScheme = 'nightLights';
-  intervalGraph;
+  /** */
+  // intervalGraph;
 
   constructor() { 
-    console.log(this.results);
-    this.intervalGraph = setInterval(() => {
-      console.log('tick');
-      const newResults = [...this.results];
-      for (let i in newResults) {
-        newResults[i].value = Math.round(Math.random() * 500);
-      }
-      this.results = newResults;
-    }, 1500);
+    /** piece of code to ilustrate how realtime app works */
+    // console.log(this.results);
+    // this.intervalGraph = setInterval(() => {
+    //   console.log('tick');
+    //   const newResults = [...this.results];
+    //   for (let i in newResults) {
+    //     newResults[i].value = Math.round(Math.random() * 500);
+    //   }
+    //   this.results = newResults;
+    // }, 1500);
   }
 
   onSelect(event) {
@@ -52,6 +40,7 @@ export class GraphComponent implements OnDestroy {
   }
   
   ngOnDestroy() {
-    clearInterval(this.intervalGraph);
+    /** */
+    // clearInterval(this.intervalGraph);
   }
 }

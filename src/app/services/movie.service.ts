@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Movie } from './../interfaces/interface';
 import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -21,5 +21,12 @@ export class MovieService {
       return this.http.get<Movie[]>(`${environment.url}/api/movies`)
                       .pipe( tap( resp => this.movies = resp ) );
     }
+  }
+
+  voteMovie(id: string) {
+    return this.http.post(`${environment.url}/api/movies/${id}`, {})
+                    .pipe( catchError(err => {
+                      return of(err.error);
+                    }));
   }
 }
